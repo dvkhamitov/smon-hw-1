@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`git`" - `Хамитов Денис`
+# Домашнее задание к занятию "`Система мониторинга Zabbix`" - `Хамитов Денис`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -24,20 +24,56 @@
 
 ### Задание 1
 
-https://github.com/dvkhamitov/8-01-1/commit/2b12df5c06f43a2a22e22e524d1d53dfa595b598
+Скриншот авторизации в админке:
 
+![alt txt](https://github.com/dvkhamitov/smon-hw-1/blob/main/img/smon-1-1.png "скриншот #1")
+
+Список команд:
+```
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian11_all.deb
+dpkg -i zabbix-release_latest_6.0+debian11_all.deb
+apt update
+apt install postgresql
+apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+sudo -u postgres createuser --pwprompt zabbix
+sudo -u postgres createdb -O zabbix zabbix
+zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+nano /etc/zabbix/zabbix_server.conf
+nano /etc/zabbix/zabbix_agentd.conf
+systemctl restart zabbix-server zabbix-agent apache2
+systemctl enable zabbix-server zabbix-agent apache2
+```
 
 ---
 
 ### Задание 2
+Скриншот раздела Configuration > Hosts:
 
-https://github.com/dvkhamitov/8-01-1/commit/0fc34b37c5a74a60ff45ee0a864ab3f6084e62f2
+![alt txt](https://github.com/dvkhamitov/smon-hw-1/blob/main/img/smon-2-1.png "скриншот #1")
 
+Скриншот лога zabbix-agent:
+
+![alt txt](https://github.com/dvkhamitov/smon-hw-1/blob/main/img/smon-2-2.png "скриншот #2")
+
+Скриншоты Monitoring > Latest data для обоих хостов:
+
+![alt txt](https://github.com/dvkhamitov/smon-hw-1/blob/main/img/smon-2-3.png "скриншот #3")
+![alt txt](https://github.com/dvkhamitov/smon-hw-1/blob/main/img/smon-2-4.png "скриншот #4")
+
+Список команд:
+```
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian12_all.deb
+dpkg -i zabbix-release_latest_6.0+debian12_all.deb
+apt update
+apt install zabbix-agent
+nano /etc/zabbix/zabbix_agentd.conf
+systemctl restart zabbix-agent
+```
 ---
 
 ### Задание 3
 
-https://github.com/dvkhamitov/8-01-1/network
+
 
 ### Задание 4
 
